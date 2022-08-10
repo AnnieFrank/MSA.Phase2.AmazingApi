@@ -34,4 +34,24 @@ namespace MSA.Phase2.AmazingApi.Controllers
             return await _dbContext.Movies.ToListAsync();
         }
 
+        /// <summary>
+        /// Provides movie information for a given id
+        /// </summary>
+        /// <returns>A an object of type Movie</returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Movie>> GetMovie(int id)
+        {
+            if (_dbContext.Movies == null)
+            {
+                return NotFound();
+            }
+            var movie = await _dbContext.Movies.FindAsync(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return movie;
+        }
 }
