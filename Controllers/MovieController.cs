@@ -54,4 +54,17 @@ namespace MSA.Phase2.AmazingApi.Controllers
 
             return movie;
         }
+
+        /// <summary>
+        /// Inserts a new movie record in the database
+        /// </summary>
+        /// <returns>A an object of type Movie</returns>
+        [HttpPost]
+        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+        {
+            _dbContext.Movies?.Add(movie);
+            await _dbContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, movie);
+        }
 }
