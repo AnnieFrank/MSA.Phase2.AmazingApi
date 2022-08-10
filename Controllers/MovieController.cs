@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MSA.Phase2.AmazingApi.model;
@@ -75,7 +75,7 @@ namespace MSA.Phase2.AmazingApi.Controllers
             if (id != movie.Id)
             {
                 return BadRequest();
-}
+            }
 
             _dbContext.Entry(movie).State = EntityState.Modified;
 
