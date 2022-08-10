@@ -14,9 +14,9 @@ builder.Services.AddSwaggerDocument(options =>
 
 });
 
-builder.Services.AddHttpClient("reddit", configureClient: client =>
+builder.Services.AddHttpClient("pokemon", configureClient: client =>
 {
-    client.BaseAddress = new Uri("https://www.reddit.com/dev/api");
+    client.BaseAddress = new Uri("https://pokeapi.co");
 });
 
 // Add DbContext Services
