@@ -1,4 +1,7 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.EntityFrameworkCore;
+using MSA.Phase2.AmazingApi.models;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -15,6 +18,10 @@ builder.Services.AddHttpClient("reddit", configureClient: client =>
 {
     client.BaseAddress = new Uri("https://www.reddit.com/dev/api");
 });
+
+// Add DbContext Services
+builder.Services.AddDbContext<MovieContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieContext")));
 
 
 var app = builder.Build();
