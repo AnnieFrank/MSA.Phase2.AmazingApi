@@ -67,4 +67,33 @@ namespace MSA.Phase2.AmazingApi.Controllers
 
             return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, movie);
         }
+
+        // PUT: api/Movies/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
+        {
+            if (id != movie.Id)
+            {
+                return BadRequest();
 }
+
+            _dbContext.Entry(movie).State = EntityState.Modified;
+
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MovieExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
